@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux';
+import reducer from './reducer';
+import ParserReducer from './ParserReducer';
 
 const rootReducer = combineReducers({
-  state: (state = {}) => state
+  fetchReducer: reducer,
+  parserReducer: ParserReducer
 });
 
 export default rootReducer;
