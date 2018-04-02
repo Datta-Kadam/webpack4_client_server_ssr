@@ -1,46 +1,34 @@
 
 const path = require('path');
 const webpack = require('webpack');
+
 //const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-//const BundleAnaylyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+
+
+const VENDOR_LIBS = [
+    'react', 'react-dom', 'react-redux', 'redux',
+    'redux-thunk', 'axios', 'lodash', 'react-bootstrap', 
+    'react-cookies', 'react-router', 'react-router-dom', 'redux-logger'
+];
 
 const config = {
     entry: {
         //multiple entry point instead of './src/index.js'
-        bundle: [ 
-           //'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
-            //'webpack-hot-middleware/client?http://localhost:9999',
-            'babel-register',
-            'react-hot-loader/patch',
-            'webpack-hot-middleware/client',
-            'babel-polyfill', './src/index.js'
-            ]
+        bundle: ['babel-polyfill', './src/index.js'],
+        vendor: VENDOR_LIBS
     },
     output: {
         path: path.resolve(__dirname, '../build'),
-        filename: '[name].[hash].js',
+        filename: '[name].[chunkhash].js',
         publicPath: '/'
     },
     mode: 'development',
     devServer: {
         contentBase: 'build',
         overlay: true,
-        hot: true,
         stats: {
           colors: true
-        }
-    },
-    optimization: {
-        splitChunks: {
-            chunks: 'all',
-            cacheGroups: {
-                vendor: {
-                    name: 'vendor',
-                    chunks: 'initial',
-                    minChunks: 2
-                }
-            }
         }
     },
     devtool: 'source-map',
@@ -51,23 +39,6 @@ const config = {
                 test: /\.js$/,
                 exclude: /node_modules/
             },
-            // {
-            //     test: /\.html$/,
-            //     use: [
-            //         {
-            //             loader: 'file-loader',
-            //             options: {
-            //                 name: '[name].[ext]'
-            //             }
-            //         },
-            //         {
-            //             loader: 'extract-loader'
-            //         },
-            //         {
-            //             loader: 'html-loader'
-            //         }
-            //     ]
-            // },
             {
                 test: /\.css$/,
                 use: [
@@ -95,18 +66,13 @@ const config = {
         //divides bundle app code and vendor(react , redux etc) code
         //adds the vendor.js and bundle.js script 
         //into index.html automatically after changes in file and build done
-        new webpack.HotModuleReplacementPlugin(),        
-        new webpack.NamedModulesPlugin(),
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
         //react used NODE_ENV on window scope
         new webpack.DefinePlugin({
-            'process.env': { NODE_ENV: JSON.stringify('development') }
+            'process.env': { NODE_ENV: JSON.stringify('production') }
         })
-        // new BundleAnaylyzerPlugin({
-        //     generateStatsFile: true
-        // })
     ]
 };
 

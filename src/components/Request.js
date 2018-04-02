@@ -17,7 +17,7 @@ class Request extends Component {
     }
    // debugger;;
     componentDidMount() {      
-      //  debugger;
+      //debugger;
         this.requestEditor = CodeMirror.fromTextArea(document.getElementById('request'), {			
             theme: 'eclipse',
             lineNumbers: true			
@@ -25,7 +25,7 @@ class Request extends Component {
 
         this.requestEditor.on('change', value => {
          // debugger;
-            console.log(value);
+            console.log('value111', value);
             this.requestEditor.save();
             this.requestValue = this.requestEditor.getValue();
          // debugger;
@@ -34,7 +34,7 @@ class Request extends Component {
             } else {
                 this.setState({ validRequest: false });
             } 
-           //    debugger;
+            debugger;
             this.props.onRequestChange(this.requestEditor.getValue());				
         });    
     }

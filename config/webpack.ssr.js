@@ -97,9 +97,9 @@ const config = {
         //into index.html automatically after changes in file and build done
         new webpack.HotModuleReplacementPlugin(),        
         new webpack.NamedModulesPlugin(),
-        new HtmlWebpackPlugin({
-            template: './src/index.html'
-        }),
+        // new HtmlWebpackPlugin({
+        //     template: './src/index.html'
+        // }),
         //react used NODE_ENV on window scope
         new webpack.DefinePlugin({
             'process.env': { NODE_ENV: JSON.stringify('development') }

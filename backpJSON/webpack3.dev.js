@@ -1,9 +1,18 @@
 
 const path = require('path');
 const webpack = require('webpack');
+
 //const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 //const BundleAnaylyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+
+const VENDOR_LIBS = [
+    'webpack-hot-middleware/client',
+    'react', 'react-dom', 'react-redux', 'redux',
+    'redux-thunk', 'axios', 'lodash', 'react-bootstrap', 
+    'react-cookies', 'react-router', 'react-router-dom', 'redux-logger'
+    
+];
 
 const config = {
     entry: {
@@ -15,7 +24,8 @@ const config = {
             'react-hot-loader/patch',
             'webpack-hot-middleware/client',
             'babel-polyfill', './src/index.js'
-            ]
+            ],
+        vendor: VENDOR_LIBS
     },
     output: {
         path: path.resolve(__dirname, '../build'),
