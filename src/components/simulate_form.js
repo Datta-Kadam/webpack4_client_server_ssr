@@ -5,7 +5,6 @@ import cookie from 'react-cookies';
 import * as actions from '../actions/index';
 import Request from './Request';
 import Response from './Response';
-import checkXMLRequestStructure from '../components/commonComponents/XmlParser';
 import './simulate_form.css';
 
 
@@ -14,9 +13,9 @@ class SimulateForm extends Component {
    //call the redux store with action to get the initial state from backend
         
         componentWillMount() {
-            debugger;
+           // debugger;
             this.props.getReleaseData();
-            debugger;
+          //  debugger;
         }
 
         onResponseChange(updatedResponse) {

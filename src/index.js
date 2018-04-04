@@ -1,7 +1,7 @@
 //Automatically added using tranform runtime plugin added in .babelrc
 //import 'babel-plugin-transform-runtime';
 
-import { AppContainer } from 'react-hot-loader';
+//import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -12,29 +12,35 @@ import logger from 'redux-logger';
 import routes from './routes';
 import reducers from './reducers';
 
+const initialState = window.INITIAL_STATE;
 
-const createStoreWithMiddleware = applyMiddleware(thunk, logger)(createStore);
+//CRETAE A LOGGER MIDDLEWARE
+const middleware = applyMiddleware(thunk);
 
-const Routes = (
-    //<CookiesProvider>
-    <Provider store={createStoreWithMiddleware(reducers)}>
-        <BrowserRouter>
-            {routes}
-        </BrowserRouter>
-    </Provider>
-   // </CookiesProvider>
-  );
+//APPLY LOGGER MIDDLEWARE
+const createStoreWithMiddleware = createStore(reducers, initialState, middleware);
+
+//const createStoreWithMiddleware = applyMiddleware(thunk, logger)(createStore(initialState));
+// const Routes = (
+//     //<CookiesProvider>
+//     <Provider store={createStoreWithMiddleware}>
+//         <BrowserRouter>
+//             {routes}
+//         </BrowserRouter>
+//     </Provider>
+//    // </CookiesProvider>
+//   );
   
   function render(value) {
       ReactDOM.render(      
-        <AppContainer>   
-             <Provider store={createStoreWithMiddleware(reducers)}>              
+      // <AppContainer>   
+             <Provider store={createStoreWithMiddleware}>              
                 <BrowserRouter>
                 { value }
                 </BrowserRouter>              
-            </Provider>  
-            </AppContainer>     
-          , document.querySelector('.container'));
+            </Provider>,
+    //  </AppContainer>, 
+      document.querySelector('.container'));
   }
   
   render(routes);
@@ -43,8 +49,8 @@ const Routes = (
   if (module.hot) {
     module.hot.accept('./routes.js', () => {
       const newRoutes = require('./routes.js').default;
-  
+
       render(newRoutes);
     });
   }
-  
+

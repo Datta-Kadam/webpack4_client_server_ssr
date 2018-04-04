@@ -1,49 +1,63 @@
-//require('babel-register');
-
 import express from 'express';
 import fallback from 'express-history-api-fallback';
+import cookieParser from 'cookie-parser';
+import webpack from 'webpack';
+import path from 'path';
+import history from 'connect-history-api-fallback';
+import expressStaticGzipMiddleware from 'express-static-gzip';
+import webpackHotServerMiddleware from 'webpack-hot-server-middleware';
+import RequestHandler from './requestHandler'; 
 
-//import path from 'path';
-const webpack = require('webpack');
-const config = require('../../config/webpack.dev');
-const history = require('connect-history-api-fallback');
-
-//Sert up for Hot reloading using webpack-dev-middlware
-const compiler = webpack(config);
-const webpackDevMiddlware = require('webpack-dev-middleware')(
-    compiler,
-    config.devServer, {
-        publicPath: config.output.publicPath
-    }
-);
-const webpackHotMiddleware = require('webpack-hot-middleware')(compiler);
+import configDevClient from '../../config/webpack.dev-client';
+import configDevServer from '../../config/webpack.dev-server';
+import configProdClient from '../../config/webpack.prod-client';
+import configProdServer from '../../config/webpack.prod-server';
 
 const server = express();
-server.use(history());
-server.use(webpackDevMiddlware);
-server.use(webpackHotMiddleware);
+server.use(cookieParser());
 
-//debugger;
-//static middlware for serving static react content from build directory
-
-// const staticMiddleware = express.static('build');
-// server.use(staticMiddleware);
-// server.use(fallback('index.html', __dirname='build'));
-//console.log('staticMiddleware', staticMiddleware);
+server.use(express.static(path.join(__dirname, 'build')));
 const root = `${__dirname = 'build'}`;
-// console.log('Static path = > ', root);
-// const root1 = `${__dirname}\\public`;
-//console.log('ROOOOOT', __dirname='build');
-/**middlware with express static  */
-// const staticMiddleware = express.static(root);
-// server.use(staticMiddleware);
-/**middleware with express statuc gzip servering content in gzip format for static files */
+const isProd = process.env.NODE_END === 'production';
+const isDev = !isProd;
 
-const expressStaticGzipMiddleware = require('express-static-gzip');
+if (false) {
+    const compiler = webpack([configDevClient, configDevServer]);
+    const clientComplier = compiler.compilers[0];
+    const serverComplier = compiler.compilers[1];
 
-server.use(expressStaticGzipMiddleware(root));
-server.use(fallback('index.html', { root }));
-//debugger;
+   // require('webpack-mild-compile')(compiler);
+    debugger;
+    const webpackDevMiddlware = require('webpack-dev-middleware')(
+        compiler,
+        configDevClient.devServer
+    );
+    debugger;
+    const webpackHotMiddleware = require('webpack-hot-middleware')(
+        clientComplier,
+        configDevClient.devServer
+    );   
+   
+    
+  //  server.use(history());
+    server.use(webpackDevMiddlware);
+    server.use(webpackHotMiddleware);
+  //  server.use(webpackHotServerMiddleware(compiler));
+  // server.set('view engine', 'ejs');
+  // server.use(RequestHandler); 
+   // server.use(expressStaticGzipMiddleware(root));
+    console.log('Middleware enabled for Development'); 
+    
+    // server.set('view engine', 'ejs');
+    // server.use(RequestHandler);   
+} else {
+    server.set('view engine', 'ejs');
+    server.use(expressStaticGzipMiddleware('build'));
+    server.use(RequestHandler);   
+    console.log('Middleware enabled for production');  
+}
+
+server.use(fallback('index.ejs', `${__dirname = 'build'}`));
 server.listen(9999, () => {
     console.log('Server is listening');
 });

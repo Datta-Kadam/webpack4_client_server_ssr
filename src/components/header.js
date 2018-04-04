@@ -14,7 +14,7 @@ import './header.css';
               <MenuItem eventKey={3.2} href="/UpdateRequestResponse">Update_Request-response</MenuItem>            
             </NavDropdown>
             <NavItem eventKey={1} href="#">Projects-UrlDetails</NavItem>
-            <NavItem eventKey={2} href="#">MyRequests-removed</NavItem>          
+            <NavItem eventKey={2} href="#">MyRequests</NavItem>          
           </Nav>
         </Navbar>   
          
@@ -22,6 +22,5 @@ import './header.css';
     );
   }
 }
-
 
 export default Headers;

@@ -9,17 +9,14 @@ const CompressionPlugin = require('compression-webpack-plugin');
 
 
 const config = {
+    name: 'client',
     entry: {
         //multiple entry point instead of './src/index.js'
-        bundle: [ 
-           //'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
-            //'webpack-hot-middleware/client?http://localhost:9999',
-            'babel-polyfill', './src/index.js'
-            ]
+        bundle: ['babel-polyfill', './src/index.js']
     },
     output: {
         path: path.resolve(__dirname, '../build'),
-        filename: '[name].[hash].js',
+        filename: '[name].js',
         publicPath: '/'
     },
     mode: 'production',
@@ -73,10 +70,11 @@ const config = {
         }),
         //Used to seperate all css files into style.css file
         new ExtractTextPlugin('style.css'),
-        new HtmlWebpackPlugin({
-            template: './src/index.html'
-        }),
+        // new HtmlWebpackPlugin({
+        //     template: './src/index.html'
+        // }),
         //react used NODE_ENV on window scope
+        new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin({
             'process.env': { NODE_ENV: JSON.stringify('production') }
         }),

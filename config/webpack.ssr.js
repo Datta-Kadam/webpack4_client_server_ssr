@@ -19,7 +19,7 @@ const config = {
     },
     output: {
         path: path.resolve(__dirname, '../build'),
-        filename: '[name].[hash].js',
+        filename: '[name].js',
         publicPath: '/'
     },
     mode: 'development',

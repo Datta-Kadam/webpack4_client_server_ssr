@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import CodeMirror from 'codemirror';
-import 'codemirror/mode/javascript/javascript.js';
-import 'codemirror/mode/xml/xml.js';
-import 'codemirror/mode/markdown/markdown.js';
+// import CodeMirror from 'codemirror';
+// import 'codemirror/mode/javascript/javascript.js';
+// import 'codemirror/mode/xml/xml.js';
+// import 'codemirror/mode/markdown/markdown.js';
+
+let CodeMirror = null;
+if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
+    CodeMirror = require('codemirror');
+    require('codemirror/mode/javascript/javascript');
+    //import 'codemirror/mode/xml/xml.js';
+    //import 'codemirror/mode/markdown/markdown.js';
+    require('./Response.css');
+}
+
 import checkXMLResponseStructure from '../components/commonComponents/XmlParser';
-import './Response.css';
+
 
 class Response extends Component {  
 
