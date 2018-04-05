@@ -16,26 +16,17 @@ export default () => (req, res) => {
     .then((response) => {
         const middleware = applyMiddleware(thunk);
         const store = createStore(reducers, { fetchReducer: response.data }, middleware);
-        const initialState = serialize(store.getState());
-        
-        const context = {};
-        console.log('How context looks like -', context, req.url);
+        const initialState = serialize(store.getState());  
         const reactComponent = renderToString(
             <Provider store={store}>
-                <StaticRouter location={req.url} context={context}>
+                <StaticRouter location={req.url} context={{}}>
                     {routes}
                 </StaticRouter>
             </Provider>
-        );
-        if (context.url) {
-            Redirect(context.status, context.url);
-        } else {
-            res.status(200).render('index.ejs', { reactComponent, initialState });
-        }
+        );        
+        res.status(200).render('index', { reactComponent, initialState });       
     })
     .catch((err) => {
         console.log('#Initial Server side rendering error', err);
     });
 };
-
-//module.exports = handleRender;

@@ -14,7 +14,7 @@ class Simulate_form_Update extends Component{
             this.props.getReleaseData();
             console.log(this.props.projData);
             debugger;
-            console.log('checking props passed by authentication component',this.props);
+            console.log('checking props passed by authentication component', this.props);
         }
 
         handleReleaseChange(event){

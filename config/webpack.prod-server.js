@@ -8,13 +8,12 @@ const config = {
     name: 'server',
     target: 'node',
     externals: nodeExternals(),
-    entry: {
-        //multiple entry point instead of './src/index.js'
-        server: ['babel-polyfill', './src/server/main.js']
-    },
+   // entry: ['babel-polyfill', './src/server/requestHandler.js'],
+    entry: './src/server/requestHandler.js',
     output: {
+        filename: 'prod-server-bundle.js',
         path: path.resolve(__dirname, '../dist'),
-        filename: '[name]-bundle.js'
+        libraryTarget: 'commonjs2'      
     },
     mode: 'production',
     optimization: {
@@ -56,7 +55,7 @@ const config = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin('style.css'),
+        new ExtractTextPlugin('main.css'),
         new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin({
             'process.env': { NODE_ENV: JSON.stringify('production') }

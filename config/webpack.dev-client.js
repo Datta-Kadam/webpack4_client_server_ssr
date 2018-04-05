@@ -19,10 +19,11 @@ const config = {
     },
     output: {
         path: path.resolve(__dirname, '../build'),
-        filename: '[name].bundle.js',
+        filename: '[name].js',
         publicPath: '/'
     },
-    mode: 'development',
+    mode: 'development',    
+    devtool: 'source-map',
     devServer: {
         contentBase: 'build',
         overlay: true,
@@ -31,7 +32,18 @@ const config = {
           colors: true
         }
     },
-    devtool: 'source-map',   
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+                vendor: {
+                    name: 'vendor',
+                    chunks: 'initial',
+                    minChunks: 2
+                }
+            }
+        }
+    },      
     module: {
         rules: [
             {
@@ -77,9 +89,8 @@ const config = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin('style.css'),
-        new webpack.HotModuleReplacementPlugin(),        
-        //new webpack.NamedModulesPlugin(),
+        new ExtractTextPlugin('main.css'),
+        new webpack.HotModuleReplacementPlugin(), 
         new webpack.DefinePlugin({
             'process.env': { NODE_ENV: JSON.stringify('development'), WEBPACK: true }
         })

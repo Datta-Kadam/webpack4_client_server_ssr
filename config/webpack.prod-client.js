@@ -11,7 +11,6 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const config = {
     name: 'client',
     entry: {
-        //multiple entry point instead of './src/index.js'
         bundle: ['babel-polyfill', './src/index.js']
     },
     output: {
@@ -69,7 +68,7 @@ const config = {
             canPrint: true
         }),
         //Used to seperate all css files into style.css file
-        new ExtractTextPlugin('style.css'),
+        new ExtractTextPlugin('main.css'),
         // new HtmlWebpackPlugin({
         //     template: './src/index.html'
         // }),

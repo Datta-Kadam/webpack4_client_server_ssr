@@ -7,13 +7,22 @@ const config = {
     name: 'server',
     target: 'node',
     externals: nodeExternals(),
-    entry: './src/server/main.js',    
+    entry: './src/server/requestHandler.js',    
     output: {
         filename: 'dev-server-bundle.js',
-        path: path.resolve(__dirname, '../dist'),        
+        path: path.resolve(__dirname, '../dist'),
         libraryTarget: 'commonjs2'
     },
-    mode: 'development',  
+    mode: 'development',     
+    devtool: 'source-map',
+    devServer: {
+        contentBase: 'dist',
+        overlay: true,
+        hot: true,
+        stats: {
+          colors: true
+        }
+    }, 
     module: {
         rules: [
             {
@@ -42,14 +51,13 @@ const config = {
     },
     plugins: [
       
-        new ExtractTextPlugin('style.css'),
+        new ExtractTextPlugin('main.css'),
         // new HtmlWebpackPlugin({
         //     template: './src/index.html'
         // }),
         //react used NODE_ENV on window scope
-        new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin({
-            'process.env': { NODE_ENV: JSON.stringify('development') }
+            'process.env': { NODE_ENV: JSON.stringify('development'), WEBPACK: true }
         })
        
     ]
