@@ -13,5 +13,5 @@ const externals = fs
     externals[mod] = `commonjs ${mod}`
     return externals
   }, {})
-externals["react-dom/server"] = "commonjs react-dom/server"
+externals["react-dom/server"] = "commonjs react-dom/server";
 module.exports = externals

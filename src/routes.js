@@ -8,13 +8,12 @@ import Headers from '../src/components/header';
 import RequireAuth from './components/auth/req_auth';
 
 
-const UniversalComponent = universal(props => import(`./${props.page}`));
+const UniversalComponent = universal(props => import(`../src/components/${props.page}`));
 
 const routes = (  
     <div>
       <Headers />
        <Switch>
-        <Redirect from="/" exact to="/AddRequestResponse" />
          <Route exact path="/AddRequestResponse">
             <UniversalComponent page="Simulate_form" />
          </Route>       
