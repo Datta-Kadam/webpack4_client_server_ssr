@@ -43,6 +43,7 @@
     "jsdom-global": "^3.0.2",
     "mocha": "^2.4.5",
     "moxios": "^0.4.0",
+    "nodemon": "^1.17.3",
     "nunjucks": "^3.1.2",
     "optimize-css-assets-webpack-plugin": "^4.0.0",
     "react-addons-test-utils": "^0.14.7",
@@ -67,6 +68,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "babel": "^6.23.0",
+    "babel-plugin-universal-import": "^1.4.0",
     "babel-polyfill": "^6.26.0",
     "codemirror": "^5.34.0",
     "connect-history-api-fallback": "^1.5.0",
@@ -83,6 +85,7 @@
     "react-redux": "4.3.0",
     "react-router": "^2.8.1",
     "react-router-dom": "^4.2.2",
+    "react-universal-component": "^2.8.4",
     "redux": "^3.0.4",
     "redux-logger": "^3.0.6",
     "serialize-javascript": "^1.4.0",
