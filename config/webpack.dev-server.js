@@ -1,12 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const nodeExternals = require('webpack-node-externals');
+//const nodeExternals = require('webpack-node-externals');
+const externals = require("./node-externals");
 
 const config = {
     name: 'server',
     target: 'node',
-    externals: nodeExternals(),
+    externals,
     entry: './src/server/requestHandler.js',    
     output: {
         filename: 'dev-server-bundle.js',
@@ -50,7 +51,7 @@ const config = {
         ]
     },
     plugins: [
-      
+        
         new ExtractTextPlugin('main.css'),
         // new HtmlWebpackPlugin({
         //     template: './src/index.html'

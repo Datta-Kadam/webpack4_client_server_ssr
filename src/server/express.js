@@ -41,8 +41,8 @@ if (isDev) {
     console.log('Middleware enabled for Development'); 
 } else {
     //Make the webpack client and server js available run below webpack function    
-    webpack([configProdClient, configProdServer]).run(() => {
-        const render = require('../../dist/prod-server-bundle').default;
+    webpack([configProdClient, configProdServer]).run((err, stats) => {
+        const render = require('../../dist/prod-server-bundle.js').default;
         server.use(expressStaticGzipMiddleware('build'));
         server.use(render());   
         console.log('Middleware enabled for production');  
