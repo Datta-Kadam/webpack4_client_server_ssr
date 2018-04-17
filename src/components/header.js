@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Navbar,Nav,MenuItem,NavDropdown,NavItem,Header} from 'react-bootstrap';
-import SimulateForm from './simulate_form';
-import './header.css';
+
+import '../css/header.css';
 
  class Headers extends Component {
   render() {
@@ -14,7 +14,7 @@ import './header.css';
               <MenuItem eventKey={3.2} href="/UpdateRequestResponse">Update_Request-response</MenuItem>            
             </NavDropdown>
             <NavItem eventKey={1} href="#">Projects-UrlDetails</NavItem>
-            <NavItem eventKey={2} href="#">MyRequests-states</NavItem>          
+            <NavItem eventKey={2} href="#">MyRequests</NavItem>          
           </Nav>
         </Navbar>  
       </div>

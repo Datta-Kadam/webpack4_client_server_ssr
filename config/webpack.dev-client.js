@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 //const HtmlWebpackPlugin = require('html-webpack-plugin');
 //const BundleAnaylyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
     name: 'client',
@@ -18,8 +19,9 @@ const config = {
             ]
     },
     output: {
-        path: path.resolve(__dirname, '../build'),
         filename: '[name].js',
+        chunkFilename: '[name].js',
+        path: path.resolve(__dirname, '../build'),       
         publicPath: '/'
     },
     mode: 'development',    
@@ -62,10 +64,10 @@ const config = {
             //   },
             {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: 'css-loader'
-                })
+                use: [
+                    MiniCSSExtractPlugin.loader,
+                    'css-loader'
+                ]
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/,
@@ -89,10 +91,13 @@ const config = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin('main.css'),
+        new MiniCSSExtractPlugin(),
         new webpack.HotModuleReplacementPlugin(), 
         new webpack.DefinePlugin({
-            'process.env': { NODE_ENV: JSON.stringify('development'), WEBPACK: true }
+            'process.env': { 
+                NODE_ENV: JSON.stringify('development'),
+                WEBPACK: true 
+            }
         })
         // new BundleAnaylyzerPlugin({
         //     generateStatsFile: true

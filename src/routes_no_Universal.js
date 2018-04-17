@@ -1,9 +1,9 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Simulate_form from '../src/components/simulate_form';
-import Simulate_form_Update from '../src/components/simulate_form_update';
-import Headers from '../src/components/header';
+import Simulate_form from './components/simulate_form';
+import Simulate_form_Update from './components/simulate_form_update';
+import Headers from './components/header';
 import RequireAuth from './components/auth/req_auth';
 
 

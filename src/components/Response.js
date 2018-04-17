@@ -11,10 +11,10 @@ if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
     require('codemirror/mode/javascript/javascript');
     //import 'codemirror/mode/xml/xml.js';
     //import 'codemirror/mode/markdown/markdown.js';
-    require('./Response.css');
+    require('../css/Response.css');
 }
 
-import checkXMLResponseStructure from '../components/commonComponents/XmlParser';
+import checkXMLResponseStructure from '../commonComponents/XmlParser';
 
 
 class Response extends Component {  

@@ -33,11 +33,10 @@ const config = {
             },
             {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: 'css-loader'
-                })
-            },
+                use: {
+                  loader: 'css-loader'
+                }
+              },
             {
                 test: /\.(jpe?g|png|gif|svg)$/,
                 use: [
@@ -51,8 +50,10 @@ const config = {
         ]
     },
     plugins: [
-        
-        new ExtractTextPlugin('main.css'),
+        new webpack.optimize.LimitChunkCountPlugin({
+            maxChunks: 1
+        }),
+        // new ExtractTextPlugin('main.css'),
         // new HtmlWebpackPlugin({
         //     template: './src/index.html'
         // }),

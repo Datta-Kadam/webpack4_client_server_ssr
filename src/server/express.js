@@ -17,7 +17,7 @@ server.use(cookieParser());
 
 /* Template engine to SSR index.ejs from views folder 
 for both production and development*/
-server.set('view engine', 'ejs');
+//server.set('view engine', 'ejs');
 
 /* Need double quote for "production as with single quotes its not working in windows ENV" */
 const isProd = process.env.NODE_ENV === "production";
@@ -42,9 +42,11 @@ if (isDev) {
 } else {
     //Make the webpack client and server js available run below webpack function    
     webpack([configProdClient, configProdServer]).run((err, stats) => {
+        const clientStats = stats.toJson().children[0];
+        debugger;
         const render = require('../../dist/prod-server-bundle.js').default;
         server.use(expressStaticGzipMiddleware('build'));
-        server.use(render());   
+        server.use(render({ clientStats }));   
         console.log('Middleware enabled for production');  
     });  
 }
