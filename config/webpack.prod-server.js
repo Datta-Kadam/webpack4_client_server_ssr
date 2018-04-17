@@ -1,13 +1,13 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const nodeExternals = require('webpack-node-externals');
+
+const externals = require('./node-externals');
 
 const config = {
     name: 'server',
     target: 'node',
-    externals: nodeExternals(),
+    externals,
    // entry: ['babel-polyfill', './src/server/requestHandler.js'],
     entry: './src/server/requestHandler.js',
     output: {
@@ -37,11 +37,10 @@ const config = {
             },
             {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: 'css-loader'
-                })
-              },
+                use: {
+                  loader: 'css-loader'
+                }
+            },
             {
                 test: /\.(jpe?g|png|gif|svg)$/,
                 use: [
@@ -55,8 +54,10 @@ const config = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin('main.css'),
-        new webpack.NamedModulesPlugin(),
+       // new ExtractTextPlugin('main.css'),
+       new webpack.optimize.LimitChunkCountPlugin({
+        maxChunks: 1
+        }),
         new webpack.DefinePlugin({
             'process.env': { NODE_ENV: JSON.stringify('production') }
         })

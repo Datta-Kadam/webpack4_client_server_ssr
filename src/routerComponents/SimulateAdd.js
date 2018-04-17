@@ -3,9 +3,9 @@ import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import cookie from 'react-cookies';
 import * as actions from '../actions/index';
-import Request from './Request';
-import Response from './Response';
-import './simulate_form.css';
+import Request from '../components/Request';
+import Response from '../components/Response';
+import '../css/simulate_form.css';
 
 
 class SimulateForm extends Component {

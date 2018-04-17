@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import checkXMLRequestStructure from '../components/commonComponents/XmlParser';
+import checkXMLRequestStructure from '../commonComponents/XmlParser';
 // import CodeMirror from 'codemirror';
 // import 'codemirror/mode/javascript/javascript.js';
 // import 'codemirror/mode/xml/xml.js';

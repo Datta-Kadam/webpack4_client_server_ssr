@@ -2,8 +2,8 @@ import React,{Component} from 'react';
 import {Row , Col} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import * as actions from '../actions/index';
-import Request from './Request';
-import Response from './Response';
+import Request from '../components/Request';
+import Response from '../components/Response';
 
 
 class Simulate_form_Update extends Component{
@@ -98,9 +98,11 @@ class Simulate_form_Update extends Component{
                 <Col xs={4}>
                 <div className="form-group">
                         <label htmlFor="select">Project:</label>                      
-                        <select className="form-control" id="project"
-                        ref = {(input)=> this.projectValue = input}
-                        onChange={this.handleProjectChange.bind(this)}>>
+                        <select 
+                            className="form-control" id="project"
+                            ref = {(input)=> this.projectValue = input}
+                            onChange={this.handleProjectChange.bind(this)}
+                        >
                             <option value="Project">--Select Project --</option>
                             {this.renderProjectData()}
                         </select>
@@ -111,7 +113,8 @@ class Simulate_form_Update extends Component{
                         <label htmlFor="api">API:</label>
                         <select className="form-control" id="api"
                         ref = {(input)=> this.apiValue = input}
-                        onChange={this.handleAPIChange.bind(this)}>>
+                        onChange={this.handleAPIChange.bind(this)}
+                        >
                             <option value="Release">--Select API --</option>
                             {this.renderApiData()}
                         </select>                        
