@@ -9,8 +9,8 @@ import '../css/simulate_form.css';
 
 
 class SimulateForm extends Component {
-       //get the initial state from the db for release list
-   //call the redux store with action to get the initial state from backend
+        //get the initial state from the db for release list
+        //call the redux store with action to get the initial state from backend
         
         componentWillMount() {
            // debugger;

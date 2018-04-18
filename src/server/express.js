@@ -42,16 +42,22 @@ if (isDev) {
 } else {
     //Make the webpack client and server js available run below webpack function    
     webpack([configProdClient, configProdServer]).run((err, stats) => {
+        debugger;
         const clientStats = stats.toJson().children[0];
         debugger;
         const render = require('../../dist/prod-server-bundle.js').default;
+        console.log(
+            stats.toString({
+              colors: true
+            })
+          );
         server.use(expressStaticGzipMiddleware('build'));
         server.use(render({ clientStats }));   
         console.log('Middleware enabled for production');  
     });  
 }
 
-const PORT = process.env.PORT || 9999;
+const PORT = process.env.PORT || 9998;
 server.listen(PORT, () => {
     console.log(`Server is listening on http://localhost:${PORT}/`);
 });

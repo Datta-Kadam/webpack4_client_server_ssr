@@ -1,7 +1,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+//const ExtractTextPlugin = require('extract-text-webpack-plugin');
 //const HtmlWebpackPlugin = require('html-webpack-plugin');
 //const BundleAnaylyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
