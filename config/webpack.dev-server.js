@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 //const nodeExternals = require('webpack-node-externals');
-const externals = require("./node-externals");
+const externals = require('./node-externals');
 
 const config = {
     name: 'server',

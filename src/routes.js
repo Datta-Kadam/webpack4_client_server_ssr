@@ -14,6 +14,7 @@ const routes = (
     <div>
       <Headers />
        <Switch>
+         <Redirect from="/" exact to="/AddRequestResponse" />
          <Route exact path="/AddRequestResponse">
             <UniversalComponent page="SimulateAdd" />
          </Route>       

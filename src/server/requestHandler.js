@@ -14,10 +14,6 @@ import routes from '../routes';
 
 
 export default ({ clientStats }) => (req, res) => {
-    debugger;
-    const { js, styles, cssHash } = flushChunks(clientStats, { chunkNames: flushChunkNames() });
-    debugger;
-
     axios.get('http://localhost:3001/client/release')
     .then((response) => {
         const middleware = applyMiddleware(thunk);
@@ -29,7 +25,10 @@ export default ({ clientStats }) => (req, res) => {
                     {routes}
                 </StaticRouter>
             </Provider>
-        );        
+        );  
+        const { js, styles, cssHash } = flushChunks(clientStats, { chunkNames: flushChunkNames() });
+        console.log(js,styles,cssHash);
+        debugger;    
         res.send(`
         <html>
           <head>
@@ -43,12 +42,13 @@ export default ({ clientStats }) => (req, res) => {
           </head>
             <body>
             <div class="container"><div>${reactComponent}</div></div>
-            ${js}
+            ${cssHash}
+            ${js}            
             <script src='bundle.js'></script>
             <script src='vendors~bundle.js'></script>
           </body> 
         </html>
-        `);       
+        `);      
     })
     .catch((err) => {
         console.log('#Initial Server side rendering error', err);
