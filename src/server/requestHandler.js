@@ -14,7 +14,7 @@ import routes from '../routes';
 
 
 export default ({ clientStats }) => (req, res) => {
-    axios.get('http://localhost:3001/client/release')
+    axios.get('http://server:3001/client/release')
     .then((response) => {
         const middleware = applyMiddleware(thunk);
         const store = createStore(reducers, { fetchReducer: response.data }, middleware);
@@ -27,8 +27,8 @@ export default ({ clientStats }) => (req, res) => {
             </Provider>
         );  
         const { js, styles, cssHash } = flushChunks(clientStats, { chunkNames: flushChunkNames() });
-        console.log(js,styles,cssHash);
-        debugger;    
+       // console.log(js,styles,cssHash);
+        //debugger;    
         res.send(`
         <html>
           <head>

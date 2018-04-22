@@ -3,12 +3,12 @@ import { GET_RELEASE, GET_PROJECT,
          GET_API, DEFAULT_REQRES, XML_VALID
      } from '../actions/types';
 
-const ROOT_URL = 'http://localhost:3001';
+//const ROOT_URL = 'http://localhost:3001';
 
 export function getReleaseData() {
     return function (dispatch) {
         //GET THE RELEASE DATA FROM BACKEND AS INITIAL STATE
-        return axios.get(`${ROOT_URL}/client/release`)
+        return axios.get('/api/client/release')
         .then(response => {
            // console.log(response.data.release);
             dispatch({ type: GET_RELEASE, payload: response.data.release });
@@ -20,7 +20,7 @@ export function getReleaseData() {
 export function getProjectData(rel) {
     return function (dispatch) {
         //GET THE RELEASE DATA FROM BACKEND AS INITIAL STATE
-        return axios.get(`${ROOT_URL}/client/project/${rel}`)
+        return axios.get(`/api/client/project/${rel}`)
         .then(response => {
             //console.log(response.data.release);
             dispatch({ type: GET_PROJECT, payload: response.data.project });
@@ -31,7 +31,7 @@ export function getProjectData(rel) {
 export function getApiData(proj) {
     return function (dispatch) {
         //GET THE RELEASE DATA FROM BACKEND AS INITIAL STATE
-        return axios.get(`${ROOT_URL}/client/api/${proj}`)
+        return axios.get(`/api/client/api/${proj}`)
         .then(response => {
             //console.log(response.data.release);
             dispatch({ type: GET_API, payload: response.data.api });
@@ -44,7 +44,7 @@ export function getDefaultPair(release, projectName, apiName) {
     return function (dispatch) {
         //GET THE RELEASE DATA FROM BACKEND AS INITIAL STATE
         //console.log("release,projectName,apiName",release,projectName,apiName);
-        return axios.get(`${ROOT_URL}/client/reqrespair/${release}/${projectName}/${apiName}`)
+        return axios.get(`/api/client/reqrespair/${release}/${projectName}/${apiName}`)
         .then(response => {
            // console.log(response.data.request);
            debugger;
@@ -56,7 +56,7 @@ export function getDefaultPair(release, projectName, apiName) {
 export function simulateSubmit(formData) {    
     return function () {
         //GET THE RELEASE DATA FROM BACKEND AS INITIAL STATE
-        return axios.post(`${ROOT_URL}/client/simulate`, { credentials: 'same-origin' }, formData)
+        return axios.post('/client/simulate', { credentials: 'same-origin' }, formData)
         .then(response => {
             console.log(response);
         });
